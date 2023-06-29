@@ -1,8 +1,9 @@
 {
-  "fmtlib/fmt" : { "u" : true
-
+  "fmtlib/fmt" : { 
+      "u" : true
+    , "@": "9.0.0"
     , "packages": ["fmt"]
     , "targets": [ "fmt::fmt" ] 
   },
-  "platform" : [{"packages":["target"], "targets": [ "\"-framework CoreFoundation\"", "\"-framework CoreServices\"" ] }]
+  "platform:macos" : [{"packages":["target"], "targets": [ "\"-framework CoreFoundation\"", "\"-framework CoreServices\"" ] }]
 }
