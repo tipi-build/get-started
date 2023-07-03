@@ -18,7 +18,5 @@ jobs:
         uses: actions/checkout@v2
       - name: tipi builds project 
         run: |
-          export HOME=/root
-          mkdir -p ~/.tipi
           tipi connect
           tipi . --target linux --dont-upgrade --verbose --test all 
