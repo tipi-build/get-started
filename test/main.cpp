@@ -2,6 +2,6 @@
 
 int main()
 {
-    fmt::print("Привет мир\n");
+    fmt::print("Hello !\n");
     return 0;
 }
