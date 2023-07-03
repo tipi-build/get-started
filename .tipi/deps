@@ -1,4 +1,5 @@
 {
+  "u": true,
   "fmtlib/fmt" : { 
       "u" : true
     , "@": "9.0.0"
