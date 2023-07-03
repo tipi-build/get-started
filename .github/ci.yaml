@@ -1,0 +1,24 @@
+name: build 
+# This workflow is triggered on pushes to the repository.
+on: [push]
+
+env: 
+  TIPI_CACHE_FORCE_ENABLE: ON
+  TIPI_ACCESS_TOKEN: "${{ secrets.TIPI_ACCESS_TOKEN }}"
+  TIPI_REFRESH_TOKEN: "${{ secrets.TIPI_REFRESH_TOKEN }}"
+  TIPI_VAULT_PASSPHRASE: ${{ secrets.TIPI_VAULT_PASSPHRASE }}
+
+jobs:
+  build: 
+    name: build-linux
+    runs-on: ubuntu-latest
+    container: tipibuild/tipi-ubuntu
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: tipi builds project 
+        run: |
+          export HOME=/root
+          mkdir -p ~/.tipi
+          tipi connect
+          tipi . --target linux --dont-upgrade --verbose --test all 
