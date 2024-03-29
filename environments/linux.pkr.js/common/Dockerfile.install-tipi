@@ -1,0 +1,10 @@
+# add tipi to env
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/master/install/install_for_macos_linux.sh)"
+
+RUN mkdir main && echo "int main(){}" >> ./main/main.cpp \
+	&& tipi --dont-upgrade -v -t linux ./main \
+	&& rm -rf ./main \
+	&& rm -rf /usr/local/share/.tipi/downloads/* \
+	&& rm -rf /usr/local/share/.tipi/v*.d/* \
+	&& rm -rf /usr/local/share/.tipi/v*.w/* \
+	&& chmod -R 777 /usr/local/share/.tipi/

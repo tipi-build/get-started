@@ -1,11 +1,1 @@
-{
-  "u": true,
-  "fmtlib/fmt" : { 
-      "u" : true
-    , "@": "9.0.0"
-    , "packages": ["fmt"]
-    , "targets": [ "fmt::fmt" ] 
-    , "opts" : "set(FMT_TEST OFF CACHE BOOL \"\" FORCE)"
-  },
-  "platform:macos" : [{"packages":["target"], "targets": [ "\"-framework CoreFoundation\"", "\"-framework CoreServices\"" ] }]
-}
+{ "u" : true }

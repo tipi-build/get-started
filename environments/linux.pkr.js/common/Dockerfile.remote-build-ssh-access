@@ -1,0 +1,3 @@
+# setup ssh server
+RUN service ssh start
+EXPOSE 22
