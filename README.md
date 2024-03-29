@@ -33,5 +33,6 @@ cmake-re -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake 
 
 ### Run test  
 ```
+export TIPI_LOCAL_CONTAINER_RUNNER=ON
 cmake-re -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake --build cmake-re-build --run-test main --remote
 ```
