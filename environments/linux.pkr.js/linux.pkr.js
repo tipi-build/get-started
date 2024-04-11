@@ -3,7 +3,8 @@
   "builders": [
     {
       "type": "docker",
-      "image": "tipibuild/tipi-ubuntu:{{tipi_cli_version}}",
+      "image": "ghcr.io/daminetreg/custom-linux:{{tipi_cli_version}}",
+      "platform" : "linux/amd64",
       "commit": true
     }
   ],
