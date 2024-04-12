@@ -1,9 +1,11 @@
+# syntax = edrevo/dockerfile-plus:0.1.0
 FROM ubuntu:20.04
 ENV TIPI_DISTRO_MODE=all
 
 ARG DEBIAN_FRONTEND=noninteractive # avoid tzdata asking for configuration
 # Install needed tools
 RUN apt-get -y update && apt-get install -y \
+  openssh-server \
   sudo \
   unzip \
   && apt-get clean \
@@ -18,7 +20,7 @@ RUN rm -rf /usr/local/share/.tipi/downloads/* \
 #INCLUDE+ common/Dockerfile.apt-install-required-before-2204
 #INCLUDE+ common/Dockerfile.apt-install-required-by-customer
 #
-#INCLUDE+ common/Dockerfile.remote-build-ssh-access
+INCLUDE+ common/Dockerfile.remote-build-ssh-access
 #
-#INCLUDE+ common/Dockerfile.tipi-non-root-user
+INCLUDE+ common/Dockerfile.tipi-non-root-user
 #INCLUDE+ common/Dockerfile.install-tipi

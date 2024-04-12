@@ -3,7 +3,7 @@
   "builders": [
     {
       "type": "docker",
-      "image": "ghcr.io/daminetreg/custom-linuxmini:{{tipi_cli_version}}",
+      "image": "ghcr.io/daminetreg/custom-linuxminiplus:{{tipi_cli_version}}",
       "platform" : "linux/amd64",
       "commit": true
     }
