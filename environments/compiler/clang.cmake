@@ -29,3 +29,8 @@ set(
     "C++ compiler"
     FORCE
 )
+
+set( CMAKE_CXX_FLAGS_INIT "-fuse-ld=lld" CACHE STRING "g++ flags overriden to use lld" FORCE)
+set( CMAKE_C_FLAGS_INIT "-fuse-ld=lld" CACHE STRING "gcc flags overriden to use lld" FORCE)
+set( CMAKE_EXE_LINKER_FLAGS_INIT "-fuse-ld=lld" CACHE STRING "ld flags overriden to use lld" FORCE)
+add_link_options("LINKER:-z,notext")
