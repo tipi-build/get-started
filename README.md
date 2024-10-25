@@ -3,6 +3,8 @@
 ## Build and run all tests
 ```
 tipi build . -t linux --test all
+tipi-v56 build . -t linux-wine-msvc -j128
+tipi-v56 build . -t linux --test all
 ```
 
 ## Synchronizes build back : 
@@ -19,20 +21,20 @@ cmake --build cmake-build
 
 # Build with CMake RE
 
-## Locally
+## Non-containerized, non-hermetic on your local host
+```
+cmake-re --host -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake
+cmake-re --host -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake --build cmake-re-build
+```
+
+### Containerized
 ```
 cmake-re -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake
-cmake-re -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake --build cmake-re-build
+cmake-re -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake --build cmake-re-build --run-test main --remote --monitor
 ```
 
-## Remotely
+### Remotely
 ```
-export TIPI_LOCAL_CONTAINER_RUNNER=ON
-cmake-re -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake --build cmake-re-build --remote
+cmake-re --remote -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake --build cmake-re-build 
 ```
 
-### Run test  
-```
-export TIPI_LOCAL_CONTAINER_RUNNER=ON
-cmake-re -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake --build cmake-re-build --run-test main --remote
-```
