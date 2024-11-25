@@ -1,6 +1,6 @@
 # Build with CMake RE
 
-👉🏻 [Follow the get-started tutorial](https://feature-cmake-re-docs.dev.tipi.build/documentation/0000-getting-started-cmake)
+👉🏻 [Follow the get-started tutorial](https://tipi.build/documentation/0000-getting-started-cmake)
 
 ## TL;DR; 
 ### Containerized and Hermetic
