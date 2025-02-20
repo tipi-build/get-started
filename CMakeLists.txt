@@ -18,4 +18,4 @@ find_package(fmt REQUIRED)
 add_executable(main test/main.cpp)
 target_link_libraries(main PRIVATE fmt::fmt)
 
-add_test(NAME main COMMAND ${CMAKE_CROSSCOMPILING_EMULATOR} $<TARGET_FILE:main> )
+add_test(NAME test-target-main COMMAND ${CMAKE_CROSSCOMPILING_EMULATOR} $<TARGET_FILE:main> )
