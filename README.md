@@ -12,7 +12,8 @@ cmake-re -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake 
 ### Remotely
 ```
 tipi connect
-cmake-re --remote -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake --build cmake-re-build 
+cmake-re --remote -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake
+cmake-re -S . -B cmake-re-build -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake --build cmake-re-build --run-test main --monitor
 ```
 
 ## Non-containerized, non-hermetic on your local host
