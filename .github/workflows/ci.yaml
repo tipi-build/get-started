@@ -10,13 +10,13 @@ env:
 
 jobs:
   build: 
-    name: build-linux
+    name: build-host-linux
     runs-on: ubuntu-latest
     container: tipibuild/tipi-ubuntu
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: tipi builds project 
+      - name: cmake-re --host builds project within tipi-container
         run: |
-          tipi connect
-          tipi . --target linux --dont-upgrade --verbose --test all 
+          cmake-re --host -S . -B ./build-host -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake
+          cmake-re --build ./build-host
