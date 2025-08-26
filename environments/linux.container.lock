@@ -1,2 +1,2 @@
 // Generated File DO NOT MANUALLY EDIT, this file SHOULD be commited to version control system
-{"image_base_name":"tipibuild/tipi-ubuntu","manifest_digest":"sha256:b2a9606b584ec13dd22eb192e0d262a8b58b0e8d4035c8624cdddeceddc29aaf","platform":"linux/amd64","raw_envzip_hash":"25477f3bbbfc32659cc291b53074ebb5642c2177"}
+{"image_base_name":"tipibuild/tipi-ubuntu","manifest_digest":"sha256:ba36e028fad402037de9fee3bccc4033d04cc4494ac2138c03a8571e9b6b596c","platform":"linux/amd64","raw_envzip_hash":"f4faf71b1e4ee2361cc76d81b3737d9c87836b65"}
