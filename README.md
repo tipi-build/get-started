@@ -85,6 +85,7 @@ cmake -S . -B ./build-cached -G Ninja
 
 # Enable caching post configure (configure checks are randomly stored, do generally not benefit from caching)
 export TIPI_INTERCALATED_COMPILER_LAUNCHER=rewrapper
+export CCACHE_PREFIX=tipi-compiler-driver
 cmake --build ./build-cached -j12
 
 echo "EngFlow Build Profile: https://engflow-cache-rbe-gcp-staging.sc-corp.net/api/profiling/v1/instances/${RBE_instance:-default}/invocations/${RBE_invocation_id}"
