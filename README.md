@@ -1,6 +1,10 @@
 # Build with CMake RE
 👉🏻 [Follow the get-started tutorial](https://tipi.build/documentation/0000-getting-started-cmake)
 
+> **Want to skip the setup and just test-drive an EngFlow cluster with `cmake-re`?**
+>
+> Jump straight to the [no-install getting started guide](./NOINSTALL_FIRST_STEPS.md) for the fastest way to begin.
+
 ## TL;DR;
 1. First authenticate with `tipi connect`
 2. Pick one of the following build execution contexts :
