@@ -41,6 +41,7 @@ docker run -it \
 ```
 
 > **Command details:**
+>
 > `docker run -it`: Runs as an interactive session / TTY (allows you to use bash)
 > 
 > `--rm`: Automatically deletes the container on exit
