@@ -3,12 +3,12 @@
 If you want a quick, no-install way to test cmake-re builds against an EngFlow cluster and you already have `docker` (and `jq`) installed on your local machine, this guide is the easiest way to build the `getting-started` project.
 
 ```
-docker pull tipibuild/tipi-ubuntu:v0.0.83
+docker pull tipibuild/tipi-ubuntu:latest
 ```
 
 ```bash
 # Extract the manifest digest for the specific tag we just pulled
-IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' tipibuild/tipi-ubuntu:v0.0.83) && echo "$IMAGE_DIGEST"
+IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' tipibuild/tipi-ubuntu:latest) && echo "$IMAGE_DIGEST"
 
 # Expected output format:
 # tipibuild/tipi-ubuntu@sha256:fd838a788786a67257dfce7e8f9e0e4881cef6071f52b486f15f828c6c06a9ce
@@ -23,9 +23,13 @@ UPDATED_JSON=$(jq --indent 2 --arg new_img "$IMAGE_DIGEST" '.builders[0].image =
 # Prerequisite: Your working directory must be a git clone of https://github.com/tipi-build/get-started/
 # Prerequisite: EngFlow mTLS keys should be extracted into ~/.engflow/
 
-export RBE_service="<cluster_dns_address>:<cluster_port>"
-export RBE_tls_client_auth_cert="$HOME/.engflow/<cluster_cert>"
-export RBE_tls_client_auth_key="$HOME/.engflow/<cluster_key>"
+export RBE_service=<cluster-address:port>
+export RBE_tls_client_auth_key=/path/to/engflow.key
+export RBE_tls_client_auth_cert=/path/to/engflow.crt
+
+# Disable the tipi.build cache (which would otherwise require a user account setup first)
+export TIPI_CACHE_CONSUME_ONLY=ON
+export TIPI_CACHE_FORCE_ENABLE=OFF
 
 docker run -it \
   --rm \
@@ -35,6 +39,8 @@ docker run -it \
   -e RBE_service \
   -e RBE_tls_client_auth_cert \
   -e RBE_tls_client_auth_key \
+  -e TIPI_CACHE_CONSUME_ONLY \
+  -e TIPI_CACHE_FORCE_ENABLE \
   --workdir "$PWD" \
   tipibuild/tipi-ubuntu:v0.0.83 \
   /bin/bash
@@ -64,10 +70,6 @@ docker run -it \
 Then run the following commands in the container:
 
 ```bash
-# Disable the tipi.build cache (which would otherwise require a user account setup first)
-export TIPI_CACHE_CONSUME_ONLY=ON
-export TIPI_CACHE_FORCE_ENABLE=OFF
-
 # Configure a --distributed build from --host (which is the container here).
 # This works because the environments/linux references the same container image, so everything matches.
 cmake-re --host --distributed -B ./build -S . -GNinja -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake
