@@ -26,6 +26,7 @@ UPDATED_JSON=$(jq --indent 2 --arg new_img "$IMAGE_DIGEST" '.builders[0].image =
 export RBE_service=<cluster-address:port>
 export RBE_tls_client_auth_key=/path/to/engflow.key
 export RBE_tls_client_auth_cert=/path/to/engflow.crt
+export RBE_tls_ca_cert=/path/to/ca-cert.crt # For internal root CAs
 
 docker run -it \
   --rm \
@@ -35,6 +36,8 @@ docker run -it \
   -e RBE_service \
   -e RBE_tls_client_auth_cert \
   -e RBE_tls_client_auth_key \
+  -e RBE_tls_ca_cert \
+  -e RBE_exec_strategy=local \
   -e TIPI_CACHE_CONSUME_ONLY \
   -e TIPI_CACHE_FORCE_ENABLE \
   -e TIPI_CACHE_CONSUME_ONLY=ON \
@@ -69,6 +72,7 @@ docker run -it \
 Then run the following commands in the container:
 
 ```bash
+
 # Configure a --distributed build from --host (which is the container here).
 # This works because the environments/linux references the same container image, so everything matches.
 cmake-re --host --distributed -B ./build -S . -GNinja -DCMAKE_TOOLCHAIN_FILE=environments/linux.cmake
