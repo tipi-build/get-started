@@ -21,15 +21,11 @@ UPDATED_JSON=$(jq --indent 2 --arg new_img "$IMAGE_DIGEST" '.builders[0].image =
 
 ```bash
 # Prerequisite: Your working directory must be a git clone of https://github.com/tipi-build/get-started/
-# Prerequisite: EngFlow mTLS keys should be extracted into ~/.engflow/
+# Prerequisite: EngFlow mTLS keys are available
 
 export RBE_service=<cluster-address:port>
 export RBE_tls_client_auth_key=/path/to/engflow.key
 export RBE_tls_client_auth_cert=/path/to/engflow.crt
-
-# Disable the tipi.build cache (which would otherwise require a user account setup first)
-export TIPI_CACHE_CONSUME_ONLY=ON
-export TIPI_CACHE_FORCE_ENABLE=OFF
 
 docker run -it \
   --rm \
@@ -41,6 +37,9 @@ docker run -it \
   -e RBE_tls_client_auth_key \
   -e TIPI_CACHE_CONSUME_ONLY \
   -e TIPI_CACHE_FORCE_ENABLE \
+  -e TIPI_CACHE_CONSUME_ONLY=ON \
+  -e TIPI_CACHE_FORCE_ENABLE=OFF \
+  -e TIPI_DISABLE_AR_RANLIB_DRIVER=ON \
   --workdir "$PWD" \
   tipibuild/tipi-ubuntu:v0.0.83 \
   /bin/bash
