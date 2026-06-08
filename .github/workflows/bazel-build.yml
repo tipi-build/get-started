@@ -1,0 +1,42 @@
+name: Bazel Build via EngFlow
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+jobs:
+  bazel-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout Bazel BUILD files
+        uses: actions/checkout@v4
+        with:
+          repository: daminetreg/bazel-build-the-world-center
+          path: bazel-center
+
+      - name: Set up Bazel
+        uses: bazel-contrib/setup-bazel@0.8.5
+        with:
+          bazelisk-version: 1.x
+
+      - name: Copy BUILD files
+        run: |
+          cp -f bazel-center/tipi-build/get-started/BUILD ./ || true
+          cp -f bazel-center/tipi-build/get-started/WORKSPACE . || true
+          cp -f bazel-center/tipi-build/get-started/MODULE.bazel . || true
+
+      - name: Run Bazel build
+        id: build
+        run: bazel build //... 2>&1 | tee /tmp/bazel-output.txt
+        continue-on-error: true
+
+      - name: Report build result
+        run: |
+          STATUS=${{ steps.build.outcome }}
+          START_TIME=${{ github.event.repository.pushed_at || github.run_started_at }}
+          END_TIME=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          curl -s -X POST "https://91a04815-bbdd-4aab-a39d-5a2e29cf8715-00-hbeqbks9dcc2.worf.replit.dev/api/github/webhook" \
+            -H "Content-Type: application/json" \
+            -d "{"action":"completed","workflow_run":{"repository":{"full_name":"tipi-build/get-started"},"conclusion":"$STATUS","run_started_at":"$START_TIME","updated_at":"$END_TIME"}}"
