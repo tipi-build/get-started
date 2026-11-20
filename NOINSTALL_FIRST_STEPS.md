@@ -35,13 +35,11 @@ docker run -it \
   -e RBE_service \
   -e RBE_tls_client_auth_cert \
   -e RBE_tls_client_auth_key \
-  -e TIPI_CACHE_CONSUME_ONLY \
-  -e TIPI_CACHE_FORCE_ENABLE \
   -e TIPI_CACHE_CONSUME_ONLY=ON \
   -e TIPI_CACHE_FORCE_ENABLE=OFF \
   -e TIPI_DISABLE_AR_RANLIB_DRIVER=ON \
   --workdir "$PWD" \
-  tipibuild/tipi-ubuntu:v0.0.83 \
+  tipibuild/tipi-ubuntu:latest \
   /bin/bash
 ```
 
